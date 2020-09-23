@@ -13,6 +13,7 @@ import RegisterPage from "./pages/RegisterPage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./pages/Home";
+import CreatePage from "./pages/CreatePage";
 
 
 require("../css/app.css");
@@ -21,36 +22,34 @@ AuthAPI.setup();
 
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    AuthAPI.isAuthenticated()
-  );
+    const [isAuthenticated, setIsAuthenticated] = useState(
+        AuthAPI.isAuthenticated()
+    );
 
-  const NavbarWithRouter = withRouter(Navbar);
+    const NavbarWithRouter = withRouter(Navbar);
 
-  return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        setIsAuthenticated
-      }}
-    >
-      <HashRouter>
-        <NavbarWithRouter />
+    return ( <AuthContext.Provider value = {
+            {
+                isAuthenticated,
+                setIsAuthenticated
+            }
+        } >
+            <HashRouter >
+                <NavbarWithRouter/>
 
-        <main className="container pt-5">
-          <Switch>
-            <Route path="/login" component={LoginPage} />
-            <Route path="/register" component={RegisterPage} />
-            <Route path="/home" component={HomePage} />
-            <Route path="/users" component={UsersPage} />
-            <Route path="/posts" component={PostsPage} />
-          </Switch>
-        </main>
-      </HashRouter>
-      <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
-    </AuthContext.Provider>
-  );
+                <main className = "container pt-5">
+                <Switch>
+                    <Route path = "/login"component = { LoginPage }/> <Route path = "/register"component = { RegisterPage }/>  
+                    <Route path = "/home" component = { HomePage }/> <Route path = "/users" component = { UsersPage }/> 
+                    <Route path = "/posts" component = { PostsPage }/>  
+                    <Route path = "/new" component = { CreatePage }/> 
+                </Switch > 
+                </main> 
+            </HashRouter > 
+            < ToastContainer position = { toast.POSITION.BOTTOM_LEFT } /> 
+        </AuthContext.Provider >
+    );
 };
-    
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render( < App/> , document.getElementById('root'));

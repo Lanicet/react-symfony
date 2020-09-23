@@ -48,6 +48,11 @@ const Navbar = ({ history }) => {
             posts
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/new">
+            new
+            </NavLink>
+          </li>
         </ul>
         <ul className="navbar-nav ml-auto">
           {(!isAuthenticated && (

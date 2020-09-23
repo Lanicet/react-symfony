@@ -41,15 +41,9 @@ class Users
      */
     private $articles;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="fromUser", orphanRemoval=true)
-     */
-    private $messages;
-
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,34 +118,4 @@ class Users
         return $this;
     }
 
-    /**
-     * @return Collection|Messages[]
-     */
-    public function getMessages(): Collection
-    {
-        return $this->messages;
-    }
-
-    public function addMessage(Messages $message): self
-    {
-        if (!$this->messages->contains($message)) {
-            $this->messages[] = $message;
-            $message->setFromUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMessage(Messages $message): self
-    {
-        if ($this->messages->contains($message)) {
-            $this->messages->removeElement($message);
-            // set the owning side to null (unless already changed)
-            if ($message->getFromUser() === $this) {
-                $message->setFromUser(null);
-            }
-        }
-
-        return $this;
-    }
 }

@@ -26,8 +26,8 @@ const Posts =  () => {
             )*/
             .then(response => {
                 setLoading(false);
-                setposts(response.data);
-                setTotalItems(response.data);
+                setposts(response);
+                setTotalItems(response);
             
             });
         } catch (error) {
@@ -67,7 +67,7 @@ const Posts =  () => {
     
                             ) : (
                             <div className={'row'}>
-                                {posts.map(post =>
+                                {paginatedPost.map(post =>
                                     <div className="col-md-10 offset-md-1 row-block" key={post.id}>
                                         <ul id="sortable">
                                             <li>

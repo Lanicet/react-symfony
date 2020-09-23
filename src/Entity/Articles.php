@@ -63,17 +63,13 @@ class Articles
      */
     private $createdAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="article", orphanRemoval=true)
-     */
-    private $messages;
 
 
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
-        $this->messages = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -196,34 +192,5 @@ class Articles
         return $this;
     }
 
-    /**
-     * @return Collection|Messages[]
-     */
-    public function getMessages(): Collection
-    {
-        return $this->messages;
-    }
 
-    public function addMessage(Messages $message): self
-    {
-        if (!$this->messages->contains($message)) {
-            $this->messages[] = $message;
-            $message->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMessage(Messages $message): self
-    {
-        if ($this->messages->contains($message)) {
-            $this->messages->removeElement($message);
-            // set the owning side to null (unless already changed)
-            if ($message->getArticle() === $this) {
-                $message->setArticle(null);
-            }
-        }
-
-        return $this;
-    }
 }
